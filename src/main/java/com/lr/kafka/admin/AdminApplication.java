@@ -5,10 +5,7 @@ import org.apache.kafka.common.config.ConfigResource;
 import org.junit.Test;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * @author liurui
@@ -20,15 +17,15 @@ public class AdminApplication {
 
     public static void main(String[] args) throws Exception{
        // createTopic();
-        delTopics();
-        getTopicLists();
+
     }
 
     /**
      * 获取topic list
      * @throws Exception
      */
-    public static void getTopicLists() throws Exception {
+    @Test
+    public  void getTopicLists() throws Exception {
         AdminClient adminClient = getAdminClient();
         //是否查看internal选项
         ListTopicsOptions listTopicsOptions = new ListTopicsOptions();
@@ -122,6 +119,38 @@ public class AdminApplication {
         adminClient.alterConfigs(configMaps);
 
     }
+
+    /**
+     * 修改Config信息(新的API)
+     */
+    @Test
+    public void updateNewTopicConfig() {
+        AdminClient adminClient = getAdminClient();
+        Map<ConfigResource, Collection<AlterConfigOp>> configs = new HashMap<>();
+        //组织两个参数
+        //1.修改哪个TOPIC
+        ConfigResource configResource = new ConfigResource(ConfigResource.Type.TOPIC, TOPIC_NAME);
+        //2.修改哪个Config
+        AlterConfigOp alterConfigOp = new AlterConfigOp(new ConfigEntry("preallocate", "ture"), AlterConfigOp.OpType.SET);
+        configs.put(configResource, Collections.singleton(alterConfigOp));
+        adminClient.incrementalAlterConfigs(configs);
+
+    }
+
+
+    /**
+     * 增加partitions
+     */
+    @Test
+    public  void increasePartitions() {
+        AdminClient adminClient = getAdminClient();
+        Map<String, NewPartitions> newPartitions = new HashMap<>();
+        NewPartitions newPartition = NewPartitions.increaseTo(2);
+        newPartitions.put(TOPIC_NAME,newPartition );
+        CreatePartitionsResult partitions = adminClient.createPartitions(newPartitions);
+
+    }
+
 
 
 }
