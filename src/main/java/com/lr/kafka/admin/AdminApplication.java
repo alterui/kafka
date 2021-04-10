@@ -118,6 +118,7 @@ public class AdminApplication {
         //2.修改哪个Config
         Config config = new Config(Collections.singleton(new ConfigEntry("preallocate", "true")));
 
+
         configMaps.put(configResource, config);
         adminClient.alterConfigs(configMaps);
 
