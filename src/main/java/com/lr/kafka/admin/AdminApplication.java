@@ -120,6 +120,7 @@ public class AdminApplication {
         configMaps.put(configResource, config);
         adminClient.alterConfigs(configMaps);
 
+
     }
 
 
