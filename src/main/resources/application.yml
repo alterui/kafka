@@ -1,0 +1,13 @@
+
+
+template:
+  templates:
+    - {"templateId":"1","templateFilePath":"C:/Users/ALTERUI/workspace/kafka/src/main/resources/template/template.json","active":true}
+    - {"templateId":"2","templateFilePath":"C:/Users/ALTERUI/workspace/kafka/src/main/resources/template/template.json","active":false}
+  template-result-type: 0
+  template-result-file-path: "C:/Users/ALTERUI/workspace/kafka/src/main/resources/template/templateResult.json"
+
+wechat:
+  kafka:
+    bootstrap_servers_config: "192.168.47.129:9092"
+    acks_config: "all"
