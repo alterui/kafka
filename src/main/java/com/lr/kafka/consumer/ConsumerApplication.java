@@ -57,6 +57,7 @@ public class ConsumerApplication {
 
         KafkaConsumer<String,String> consumer = new KafkaConsumer<>(props);
 
+
         // 消费订阅哪一个Topic或者几个Topic
         consumer.subscribe(Collections.singletonList(TOPIC_NAME));
         while (true) {
