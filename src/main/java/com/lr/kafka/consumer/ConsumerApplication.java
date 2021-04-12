@@ -6,7 +6,6 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.junit.Test;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Properties;
 
@@ -57,6 +56,7 @@ public class ConsumerApplication {
         props.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
         KafkaConsumer<String,String> consumer = new KafkaConsumer<>(props);
+
         // 消费订阅哪一个Topic或者几个Topic
         consumer.subscribe(Collections.singletonList(TOPIC_NAME));
         while (true) {
