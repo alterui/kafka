@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "wechat.kafka")
 @Data
+
 public class KafkaProperties {
     private String bootstrapServersConfig;
     private String acksConfig;
